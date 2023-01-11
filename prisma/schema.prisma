@@ -1,0 +1,71 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DB_URL")
+}
+
+model addresses {
+  zipcode         String  @id @db.VarChar(255)
+  street          String? @db.VarChar(255)
+  street_type     String? @db.VarChar(255)
+  complement      String? @db.VarChar(255)
+  locality        String? @db.VarChar(255)
+  city_id         Int?
+  neighborhood_id Int?
+
+  @@index([city_id], map: "city_id")
+  @@index([neighborhood_id], map: "neighborhood_id")
+}
+
+model cities {
+  id        Int     @id
+  city      String? @db.VarChar(255)
+  uf        String? @db.VarChar(255)
+  ibge_code String? @db.VarChar(255)
+  area      String? @db.VarChar(255)
+}
+
+model city_ranges {
+  id      Int     @id @default(autoincrement()) @db.UnsignedInt
+  min     String? @db.VarChar(255)
+  max     String? @db.VarChar(255)
+  city_id Int?
+  uf      String? @db.VarChar(255)
+
+  @@index([city_id], map: "city_id")
+}
+
+model geolocations {
+  zipcode   String  @id @db.VarChar(10)
+  latitude  String? @db.VarChar(20)
+  longitude String? @db.VarChar(20)
+}
+
+model neighborhood_ranges {
+  id              Int     @id @default(autoincrement()) @db.UnsignedInt
+  min             String? @db.VarChar(255)
+  max             String? @db.VarChar(255)
+  neighborhood_id Int?
+  city_id         Int?
+  uf              String? @db.VarChar(255)
+
+  @@index([city_id], map: "city_id")
+  @@index([neighborhood_id], map: "neighborhood_id")
+}
+
+model neighborhoods {
+  id           Int     @id
+  neighborhood String? @db.VarChar(255)
+  city_id      Int?
+
+  @@index([city_id], map: "city_id")
+}
+
+model states {
+  uf        String  @id @db.VarChar(255)
+  state     String? @db.VarChar(255)
+  ibge_code String? @db.VarChar(255)
+}
