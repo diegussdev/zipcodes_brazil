@@ -12,7 +12,7 @@ export class AddressController {
     return this.addressService.getAddressByZipcode(params.zipcode);
   }
 
-  @Get('/addresses/:uf/:city/:neighborhood?')
+  @Get('/:uf/:city/:neighborhood?/addresses')
   getAddressesByNeighborhood(@Param() params: AddressesByNeighborhoodParams, @Query() query) {
     return this.addressService.getAddressesByNeighborhood(params.uf, params.city, params?.neighborhood, +query?.page);
   }
