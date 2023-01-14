@@ -21,9 +21,11 @@
 - Import database file `database_examples/zipcodes_brazil.sql`
 
 # Endpoints
+- `/:uf` - Get states
+- `/:uf/cities?page=1` - Get cities of state
+- `/:uf/:city/range` - Get zipcode range of city
+- `/:uf/:city/addresses/?page=1`- Get addresses of city
+- `/:uf/:city/neighborhoods?page=1` - Get neighborhoods of city
+- `/:uf/:city/:neighborhood/range` - Get zipcode range of neighborhood
+- `/:uf/:city/:neighborhood/addresses?page=1`- Get addresses of neighborhood
 - `/zipcode/:zipcode` - Get zipcode data
-- `/cities/:uf` - Get cities of state
-- `/cities/range/:uf/:city` - Get zipcode range of city
-- `/neighborhoods/:uf/:city?page=1` - Get neighborhoods of city
-- `/neighborhoods/range/:uf/:city/:neighborhood` - Get zipcode range of neighborhood
-- `/addresses/:uf/:city/:neighborhood?page=1`- Get addresses of neighborhood/city (neighborhood parameter is optional)
